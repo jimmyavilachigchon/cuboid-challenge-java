@@ -1,5 +1,6 @@
 package co.fullstacklabs.cuboid.challenge.model;
 
+import co.fullstacklabs.cuboid.challenge.exception.UnprocessableEntityException;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,6 +36,11 @@ public class Bag {
     @Setter(AccessLevel.PRIVATE)
     private List<Cuboid> cuboids = new ArrayList<>();
 
+    @Transient
+    private Double payloadVolume;
+    @Transient
+    private Double availableVolume;
+
     public Bag(String title, double volume) {
         this.setVolume(volume);
         this.setTitle(title);
@@ -50,6 +56,18 @@ public class Bag {
     }
 
     public void addCuboid(Cuboid cuboid) {
-        cuboids.add(cuboid);
+        payloadVolume = 0.0;
+        availableVolume = 0.0;
+        for (Cuboid c : cuboids) {
+            payloadVolume = payloadVolume + c.getWidth() * c.getHeight() * c.getDepth();
+            availableVolume = volume - payloadVolume;
+        }
+        if (volume - payloadVolume >= cuboid.getWidth() * cuboid.getHeight() * cuboid.getDepth()) {
+            cuboids.add(cuboid);
+            payloadVolume = payloadVolume + cuboid.getWidth() * cuboid.getHeight() * cuboid.getDepth();
+            availableVolume = volume - payloadVolume;
+        } else {
+            throw new UnprocessableEntityException("There are not enough available capacity to add the cuboid.");
+        }
     }
 }

@@ -29,4 +29,12 @@ public class Cuboid {
     @ManyToOne
     @JoinColumn(name = "BAG_ID", nullable = false)
     private Bag bag;
+
+    @Transient
+    private Double volume;
+
+    @PostLoad
+    public void calculateVolume() {
+        volume = Double.valueOf(width * height * depth);
+    }
 }
