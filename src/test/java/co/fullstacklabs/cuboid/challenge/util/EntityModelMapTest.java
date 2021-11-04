@@ -40,7 +40,6 @@ class EntityModelMapTest {
         Assertions.assertThat(bagDTO.getCuboids()).map(CuboidDTO::getWidth).contains(cuboid1.getWidth(), cuboid2.getWidth());
         Assertions.assertThat(bagDTO.getPayloadVolume()).isEqualTo(39d);
         Assertions.assertThat(bagDTO.getAvailableVolume()).isEqualTo(11d);
-
     }
     @Test
     void testCuboidMapping() {

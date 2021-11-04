@@ -15,6 +15,7 @@ public class CuboidTestBuilder {
         cuboid.setHeight(height);
         cuboid.setDepth(depth);
         cuboid.setBag(bag);
+        cuboid.setVolume(Double.valueOf(width * height * depth));
         return cuboid;
     }
 

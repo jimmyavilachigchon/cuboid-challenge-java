@@ -61,7 +61,11 @@ class CuboidServiceTest {
     }
     @Test
     void deleteWithSuccess() {
-        assertTrue(true);
+        Bag bag = BagTestBuilder.builder().id(30L).title("title").volume(20d).build();
+        Cuboid cuboid = CuboidTestBuilder.builder().width(2f).height(3f).depth(4f).bag(bag).build();
+        Mockito.when(repository.getById(1L)).thenReturn(cuboid);
+        cuboidService.delete(1L);
+        Assertions.assertEquals(cuboid, cuboid);
     }
 
     @Test

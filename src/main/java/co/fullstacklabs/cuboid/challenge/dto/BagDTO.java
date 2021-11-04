@@ -26,4 +26,5 @@ public class BagDTO {
     private Double payloadVolume;
     private Double availableVolume;
     private List<CuboidDTO> cuboids;
+
 }

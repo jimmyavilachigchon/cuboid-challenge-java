@@ -1,6 +1,8 @@
 package co.fullstacklabs.cuboid.challenge.service;
 
 import co.fullstacklabs.cuboid.challenge.dto.CuboidDTO;
+import co.fullstacklabs.cuboid.challenge.model.Cuboid;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +13,9 @@ import java.util.List;
  */
 public interface CuboidService {
     CuboidDTO create(CuboidDTO cuboid);
+
+    @Transactional
+    Cuboid delete(Long id);
 
     List<CuboidDTO> getAll();
 
